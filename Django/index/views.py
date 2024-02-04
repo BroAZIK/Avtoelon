@@ -22,13 +22,17 @@ class Indexview(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class Indexdetailview(APIView):
     def get(self, request: Request, pk: int):
-        index = index.objects.get(id=pk)
-        serializer = IndexSerializer(index, many=True)
-        return Response(serializer.data)
+        lndex = index.objects.get(user_id=pk)
+        try:
+            serializer = IndexSerializer(lndex)
+            return Response(serializer.data)
+        except lndex.DoesNotExist:
+            return Response({"error": "User not found"}, status=404)
+        
 
     def put(self, request: Request, pk: int) -> Response:
         data = request.data
-        task = index.objects.get(id=pk)
+        task = index.objects.get(user_id=pk)
         serializer = IndexSerializer(task, data=data)
 
         if serializer.is_valid():
@@ -37,6 +41,6 @@ class Indexdetailview(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request: Request, pk: int) -> Response:
-        index.objects.get(id=pk).delete()
+        index.objects.get(user_id=pk).delete()
 
         return Response({'message': 'deleted.'}, status=status.HTTP_200_OK)

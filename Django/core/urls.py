@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/cars/', include('Carsapi.urls') ),
     path('index/', include('index.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('', include('frontend.urls'))
 ]

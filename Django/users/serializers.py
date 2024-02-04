@@ -6,6 +6,7 @@ class allSerializer(serializers.ModelSerializer):
         model = None  # Bu qiymatga alohida modelni kiritishingiz kerak
         fields = '__all__'
 
-class usersSerializer(allSerializer):
-    class Meta(allSerializer.Meta):
+class usersSerializer(serializers.ModelSerializer):
+    class Meta:
         model = users
+        fields = "__all__"
