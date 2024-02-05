@@ -30,10 +30,22 @@ class Indexdetailview(APIView):
             return Response({"error": "User not found"}, status=404)
         
 
-    def put(self, request: Request, pk: int) -> Response:
+    def put(self, request: Request, pk: int, mk: str) -> Response:
         data = request.data
         task = index.objects.get(user_id=pk)
+        index_instance = index.objects.get(user_id=pk)
         serializer = IndexSerializer(task, data=data)
+        try:
+            index_instance.mk = data.get(f'{mk}', index_instance.mk)
+            index_instance.mk = data.get('stage', index_instance.stage)
+            index_instance.save()
+            return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+
+        except index.DoesNotExist:
+            return Response({'error': 'Bunday user_id li ma\'lumot topilmadi.'}, status=404)
+
+        except Exception as e:
+            return Response({'error': str(e)}, status=400)   
 
         if serializer.is_valid():
             serializer.save()
