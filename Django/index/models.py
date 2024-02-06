@@ -17,4 +17,5 @@ class index(models.Model):
     index_Onix = models.IntegerField()
     index_Tracker = models.IntegerField()
     index_Matiz = models.IntegerField()
+    index_Damas = models.IntegerField()
       

@@ -36,21 +36,87 @@ class Indexdetailview(APIView):
         index_instance = index.objects.get(user_id=pk)
         serializer = IndexSerializer(task, data=data)
         try:
-            index_instance.mk = data.get(f'{mk}', index_instance.mk)
-            index_instance.mk = data.get('stage', index_instance.stage)
-            index_instance.save()
-            return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Labo":
+                index_instance.index_Labo = data.get(f'{mk}', index_instance.index_Labo)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Damas":
+                index_instance.index_Damas = data.get(f'{mk}', index_instance.index_Damas)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Spark":
+                index_instance.index_Spark = data.get(f'{mk}', index_instance.index_Spark)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Nexia":
+                index_instance.index_Nexia = data.get(f'{mk}', index_instance.index_Nexia)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Cobalt":
+                index_instance.index_Cobalt = data.get(f'{mk}', index_instance.index_Cobalt)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Gentra":
+                index_instance.index_Gentra = data.get(f'{mk}', index_instance.index_Gentra)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Matiz":
+                index_instance.index_Matiz = data.get(f'{mk}', index_instance.index_Matiz)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Lacetti":
+                index_instance.index_Lacetti = data.get(f'{mk}', index_instance.index_Lacetti)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Onix":
+                index_instance.index_Onix = data.get(f'{mk}', index_instance.index_Onix)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Monza":
+                index_instance.index_Monza = data.get(f'{mk}', index_instance.index_Monza)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Equinox":
+                index_instance.index_Equinox = data.get(f'{mk}', index_instance.index_Equinox)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Tracker":
+                index_instance.index_Tracker = data.get(f'{mk}', index_instance.index_Tracker)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Malibu1":
+                index_instance.index_Malibu = data.get(f'{mk}', index_instance.index_Malibu)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+            if mk == "index_Malibu2":
+                index_instance.index_Malibu2 = data.get(f'{mk}', index_instance.index_Malibu2)
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
+
+            else:
+                index_instance.stage = data.get('stage', index_instance.stage)
+                index_instance.save()
+                return Response({'message': 'Ma\'lumot muvaffaqiyatli o\'zgartirildi.'}, status=200)
 
         except index.DoesNotExist:
             return Response({'error': 'Bunday user_id li ma\'lumot topilmadi.'}, status=404)
 
         except Exception as e:
             return Response({'error': str(e)}, status=400)   
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)       
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request: Request, pk: int) -> Response:
         index.objects.get(user_id=pk).delete()
